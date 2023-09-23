@@ -1,0 +1,137 @@
+<script>
+/**
+ * ToDoList
+ * Main feature : 
+ * 
+//  * ADI
+
+- Menambah data todo, yang perlu disimpan :
+    - id
+    - todo
+    - date (format : “yyyy-mm-dd”)
+    - isDone
+- Menampilkan list data berdasarkan todo yang telah selesai atau yang belum selesai
+
+- Memperbarui data todo, yang bisa diperbarui :
+    - todo
+    - date
+    - isDone
+
+
+//  Nisfun
+- Menampilkan list data todo
+
+- Menampilkan data berdasarkan rentang tanggal mulai dan akhir yang diberikan
+
+- Menghapus data todo yang dipilih
+ */
+
+
+///------------------------//------ memulai program --------//---------------------///
+class Todos {
+    constructor(_id, _todo, _date,_isDone) {
+        this.id = _id;
+        this.todo = _todo;
+        this.date = _date;
+        this.isDone = _isDone;
+    }
+}
+const data = [
+    {
+        id   : 1,
+        todo : "Intro to Programming ",
+        date : "5/9/2023",
+        isDone: true,
+    },
+    {
+        id   : 2,
+        todo : "Conditional and Loop Statments ",
+        date : "6/9/2023",
+        isDone: true,
+    },
+    {
+        id   : 3,
+        todo : "Intro to Git and Exercices ",
+        date : "7/9/2023",
+        isDone: true,
+    },
+    {
+        id   : 4,
+        todo : "Array and Function ",
+        date : "8/9/2023",
+        isDone: true,
+    },
+    {
+        id   : 5,
+        todo : "Exam",
+        date : "26/9/2023",
+        isDone: false,
+    },
+];
+
+//-------------------//--- function -------//----------------//
+
+// function tambah data todo :
+const addData = (id, todo, date,isDone) => {
+    data.push(new Todos(id, todo, date, isDone));
+}
+
+// Function untuk memisahkan data berdasarkan (true/false)
+const filterByStatus = (status) => {
+    const filteredData = data.filter((item) => item.isDone === status);
+    let result = "";
+    filteredData.forEach((val, id) => {
+        result += `${id + 1}. ${val.todo}, Date: ${val.date}, Is Done: `;
+
+        if (val.isDone) {
+            result += "true";
+        } else {
+            result += "false";
+        }
+        result += "\n";
+    });
+    alert("Filtered Todos:\n" + result);
+    }
+
+
+// function Mengedit data todo, yang bisa diperbarui :
+
+const editData = (id , updatedTodo, updatedDate, updatedIsDone) => {
+    const index = data.findIndex((item) => item.id === id);
+    if (index !== -1) {
+        data[index].todo = updatedTodo;
+        data[index].date = updatedDate;
+        data[index].isDone = updatedIsDone;
+        alert("Data updated sukses...!");
+    } else {
+        alert(`Todo id ${id} tidak ditemukan.`);
+    }
+}
+
+
+//------//------- fitur memasukan data input -----//------//
+
+// fitur untuk tambah data
+const id = parseInt(prompt("Masukkan id: "));
+const todo = prompt("Masukkan kegiatan (todo) :");
+const date = prompt("Masukkan tanggal :");
+const isDone =prompt(" Apakah kegiatan sudah dilakukan ?");
+
+addData(id, todo, date, isDone);
+console.log(data);
+alert("Tambah data success");
+
+// fitur memilih data bersasarkan isDone (true / false)
+const status = prompt("pilih status (true/false): ");
+            filterByStatus(status === "true",);
+
+
+// fitur untuk mengedit data
+   const editId = parseInt(prompt("Masukan id yang mau diedit: "));
+   const updatedTodo = prompt("Masukan updated todo: ");
+   const updatedDate = prompt("Masukan updated date: ");
+   const updatedIsDone = prompt("apakah ini sudah selesai ? (true/false): ");
+ editData(editId, updatedTodo, updatedDate, updatedIsDone === "true");
+
+
+</script>
